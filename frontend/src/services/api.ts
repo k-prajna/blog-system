@@ -23,7 +23,8 @@ api.interceptors.response.use(
       localStorage.removeItem('user');
       // Optionally redirect to login
     }
-    return Promise.reject(error);
+    const message = error.response?.data?.message;
+    return Promise.reject(new Error(message || error.message));
   }
 );
 
